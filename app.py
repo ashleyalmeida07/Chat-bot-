@@ -5,8 +5,7 @@ from dotenv import load_dotenv
 
 # Load API key from .env
 load_dotenv()
-genai.configure(api_key=os.getenv("AIzaSyDcyDafeT1zCBhOQUubXm-2D-1jKtZPrjg"))  # Ensure your .env file contains API_KEY=your-api-key
-                                  # update API key in .env file
+genai.configure(api_key=os.getenv(""))  # API_KEY=your-api-key
 # Initialize Flask app
 app = Flask(__name__)
 
