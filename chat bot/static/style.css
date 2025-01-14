@@ -302,7 +302,6 @@ button:hover {
     width: 80%; /* Use full width of the screen */
     height: auto; /* Let height adjust dynamically */
     padding: 10px; /* Reduce padding for a compact design */
-    border-radius: 15px; /* Slightly reduce border radius */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Adjust shadow for smaller screens */
   }
 
@@ -392,5 +391,7 @@ button:hover {
 .triangle1 {
   width: 0px;
   height: 0px;
+    top:200px;
+
 }
 }
