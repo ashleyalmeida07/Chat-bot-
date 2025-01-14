@@ -1,203 +1,396 @@
 body {
-    font-family: "Poppins", sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-image: url('./black-friday-background-with-black-gradient_416562-309.avif');
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(to bottom right, #111, #1d1d1df8); /* Gradient from dark to lighter shade */
     background-repeat: no-repeat;
-  background-attachment: fixed; 
-  background-size: 100% 100%;
+background-attachment: fixed; 
+background-size: 100% 100%;
+
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden; /* Hide overflow for shapes */
 }
 
-#heading {
-    text-align: center;
-    font-size: 1.5em;
-    color: #333;
-    margin-bottom: 10px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+/* Background shapes */
+.background-shape {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 0; /* Keep shapes in the background */
+}
+
+.circle1 {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  top: 50px;
+  left: 50px;
+}
+
+.circle2 {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  top: 250px;
+  right: 50px;
+}
+
+.square1 {
+  width: 150px;
+  height: 150px;
+  background-color: rgba(255, 255, 255, 0.3);
+  top: 300px;
+  left: 200px;
+  transform: rotate(45deg); /* Diagonal square */
+}
+
+.square2 {
+  width: 120px;
+  height: 120px;
+  background-color: rgba(255, 255, 255, 0.3);
+  bottom: 150px;
+  left: 50px;
+}
+
+.triangle1 {
+  width: 0;
+  height: 0;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  border-bottom: 100px solid rgba(255, 255, 255, 0.15);
+  top: 50px;
+  right: 100px;
+}
+
+/* Chat Bot container */
+.chat-bot {
+  width: 400px;
+  height: 400px;
+  background-color: #222;
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+  z-index: 1; /* Chat container above background shapes */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 #chat-container {
-    width: 400px;
-    height: 600px;
-    padding: 20px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  position: relative;
 }
-
-#chat-window {
-    height: 420px;
-    width: 378px;
-    overflow-y: auto;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    background-color: #fafafa;
-}
-
-#chat-log div {
-    margin: 5px 0;
-    display: flex;
-    max-width: 70%;
-}
-
-.user-message {
-    color: #fff;
-    background-color: #061307;
-    padding: 10px;
-    border-radius: 8px;
-    align-self: flex-end; /* Align messages to the right */
-    text-align: right;
-    word-wrap: break-word;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-.bot-message {
-    color: #000;
-    background-color: #e4e4e4;
-    padding: 10px;
-    border-radius: 8px;
-    align-self: flex-start; /* Align messages to the left */
-    text-align: left;
-    word-wrap: break-word;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-#user-input {
-    width:378px;
-    padding: 8px;
-    margin: 8px 5px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
 button {
-    width:  396px;
-    padding: 10px;
-    margin: 5px;
-    background-color: #061307;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  margin-top: 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
 }
 
 button:hover {
-    background-color: #202020;
+  background-color: #0056b3;
 }
-/* From Uiverse.io by vinodjangid07 */ 
+
+
+#heading {
+  text-align: center;
+  font-size: 1.5em;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+#chat-container {
+  width: 400px;
+  height: 600px;
+  padding: 20px;
+  background: white;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.345);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#chat-window {
+  height: 420px;
+  width: 378px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #fafafa;
+}
+
+#chat-log div {
+  margin: 5px 0;
+  display: flex;
+  max-width: 70%;
+}
+
+.user-message {
+  color: #fff;
+  background-color: #061307;
+  padding: 10px;
+  border-radius: 8px;
+  align-self: flex-end; /* Align messages to the right */
+  text-align: right;
+  word-wrap: break-word;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bot-message {
+  color: #000;
+  background-color: #e4e4e4;
+  padding: 10px;
+  border-radius: 8px;
+  align-self: flex-start; /* Align messages to the left */
+  text-align: left;
+  word-wrap: break-word;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+#user-input {
+  width:378px;
+  padding: 8px;
+  margin: 8px 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  width:  396px;
+  padding: 10px;
+  margin: 5px;
+  background-color: #061307;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #000000;
+}
 .messageBox {
-    width: fit-content;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #2d2d2d;
-    padding: 0 15px;
-    border-radius: 10px;
-    border: 1px solid rgb(63, 63, 63);
+  width: fit-content;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2d2d2d;
+  padding: 0 15px;
+  border-radius: 10px;
+  border: 1px solid rgb(63, 63, 63);
+}
+.messageBox:focus-within {
+  border: 1px solid rgb(110, 110, 110);
+}
+.fileUploadWrapper {
+  width: fit-content;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#file {
+  display: none;
+}
+.fileUploadWrapper label {
+  cursor: pointer;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.fileUploadWrapper label svg {
+  height: 18px;
+}
+.fileUploadWrapper label svg path {
+  transition: all 0.3s;
+}
+.fileUploadWrapper label svg circle {
+  transition: all 0.3s;
+}
+.fileUploadWrapper label:hover svg path {
+  stroke: #fff;
+}
+.fileUploadWrapper label:hover svg circle {
+  stroke: #fff;
+  fill: #3c3c3c;
+}
+.fileUploadWrapper label:hover .tooltip {
+  display: block;
+  opacity: 1;
+}
+.tooltip {
+  position: absolute;
+  top: -40px;
+  display: none;
+  opacity: 0;
+  color: white;
+  font-size: 10px;
+  text-wrap: nowrap;
+  background-color: #000;
+  padding: 6px 10px;
+  border: 1px solid #3c3c3c;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.596);
+  transition: all 0.3s;
+}
+#messageInput {
+  width: 200px;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  padding-left: 10px;
+  color: white;
+}
+#messageInput:focus ~ #sendButton svg path,
+#messageInput:valid ~ #sendButton svg path {
+  fill: #3c3c3c;
+  stroke: white;
+}
+
+#sendButton {
+  width: fit-content;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#sendButton svg {
+  height: 18px;
+  transition: all 0.3s;
+}
+#sendButton svg path {
+  transition: all 0.3s;
+}
+#sendButton:hover svg path {
+  fill: #3c3c3c;
+  stroke: white;
+}
+@media (max-width: 480px) {
+  body {
+    flex-direction: column; /* Stack content vertically */
+    padding: 10px; /* Add padding for smaller screens */
+    background-size: cover; /* Ensure the background scales properly */
+    background-position: center; /* Center the background */
   }
-  .messageBox:focus-within {
-    border: 1px solid rgb(110, 110, 110);
+
+  #chat-container {
+    width: 80%; /* Use full width of the screen */
+    height: auto; /* Let height adjust dynamically */
+    padding: 10px; /* Reduce padding for a compact design */
+    border-radius: 15px; /* Slightly reduce border radius */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Adjust shadow for smaller screens */
   }
-  .fileUploadWrapper {
-    width: fit-content;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Arial, Helvetica, sans-serif;
+
+  #chat-window {
+    width: 93%; /* Use full width */
+    height: 250px; /* Reduce height for smaller screens */
+    margin-bottom: 10px; /* Maintain spacing */
+    font-size: 14px; /* Adjust font size for better readability */
   }
-  
-  #file {
-    display: none;
+
+  #chat-log div {
+    max-width: 90%; /* Increase message width for better readability */
   }
-  .fileUploadWrapper label {
-    cursor: pointer;
-    width: fit-content;
-    height: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+
+  .user-message,
+  .bot-message {
+    font-size: 14px; /* Adjust message font size */
+    padding: 8px; /* Reduce padding */
+    border-radius: 6px; /* Reduce border radius */
   }
-  .fileUploadWrapper label svg {
-    height: 18px;
+
+  #user-input {
+    width: 93%; /* Stretch input field to full width */
+    margin: 5px 0; /* Adjust spacing */
+    padding: 10px; /* Maintain usability */
+    font-size: 14px; /* Adjust font size */
   }
-  .fileUploadWrapper label svg path {
-    transition: all 0.3s;
+
+  button {
+    width: 100%; /* Stretch button to full width */
+    margin: 10px 0; /* Add vertical spacing */
+    padding: 12px; /* Maintain touch-friendly dimensions */
+    font-size: 14px; /* Adjust font size */
   }
-  .fileUploadWrapper label svg circle {
-    transition: all 0.3s;
+
+  .messageBox {
+    width: 100%; /* Full width for the message box */
   }
-  .fileUploadWrapper label:hover svg path {
-    stroke: #fff;
-  }
-  .fileUploadWrapper label:hover svg circle {
-    stroke: #fff;
-    fill: #3c3c3c;
-  }
-  .fileUploadWrapper label:hover .tooltip {
-    display: block;
-    opacity: 1;
-  }
-  .tooltip {
-    position: absolute;
-    top: -40px;
-    display: none;
-    opacity: 0;
-    color: white;
-    font-size: 10px;
-    text-wrap: nowrap;
-    background-color: #000;
-    padding: 6px 10px;
-    border: 1px solid #3c3c3c;
-    border-radius: 5px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.596);
-    transition: all 0.3s;
-  }
+
+
   #messageInput {
-    width: 200px;
-    height: 100%;
-    background-color: transparent;
-    outline: none;
-    border: none;
-    padding-left: 10px;
-    color: white;
+    width: 70%; /* Allow space for the send button */
+    padding: 8px; /* Reduce padding */
   }
-  #messageInput:focus ~ #sendButton svg path,
-  #messageInput:valid ~ #sendButton svg path {
-    fill: #3c3c3c;
-    stroke: white;
+
+  #messageInput:focus{
+   border: black;
   }
-  
+  #user-input:focus {
+    border-color: black ; /* Change border color to black when focused */
+    outline: none; /* Optionally remove the default outline */
+  }
+
   #sendButton {
-    width: fit-content;
-    height: 100%;
-    background-color: transparent;
-    outline: none;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s;
+    width: 25%; /* Adjust button width to fit layout */
+    font-size: 14px; /* Adjust font size */
+    padding: 8px; /* Maintain usability */
   }
-  #sendButton svg {
-    height: 18px;
-    transition: all 0.3s;
+
+  #heading {
+    font-size: 1.2em; /* Reduce heading size */
+    margin-bottom: 15px; /* Maintain spacing */
   }
-  #sendButton svg path {
-    transition: all 0.3s;
-  }
-  #sendButton:hover svg path {
-    fill: #3c3c3c;
-    stroke: white;
-  }
+
   
+.circle1 {
+  width: 0px;
+  height: 0px;
+
+}
+
+.circle2 {
+  width: 0px;
+  height: 0px;
+}
+
+.square1 {
+  width: 0px;
+  height: 0px;
+}
+
+.square2 {
+  width: 0px;
+  height: 0px;
+}
+
+.triangle1 {
+  width: 0px;
+  height: 0px;
+}
+}
