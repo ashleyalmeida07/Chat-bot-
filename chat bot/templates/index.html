@@ -7,14 +7,22 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <div class="background-shape circle1"></div>
+    <div class="background-shape circle2"></div>
+    <div class="background-shape square1"></div>
+    <div class="background-shape square2"></div>
+    <div class="background-shape triangle1"></div>
+  
     <div id="chat-container">
-        <h1 id="heading">Chat Bot</h1>
-        <div id="chat-window">
-            <div id="chat-log"></div>
-        </div>
-        <input type="text" id="user-input" placeholder="Type a message...">
-         <button onclick="sendMessage()">Send</button>
+      <h1 id="heading">Chat Bot</h1>
+      <div id="chat-window">
+        <div id="chat-log"></div>
+      </div>
+      <input type="text" id="user-input" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
     </div>
+  
+  
 
     <script>
         async function sendMessage() {
