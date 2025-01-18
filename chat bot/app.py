@@ -30,7 +30,7 @@ model = genai.GenerativeModel(
     model_name="gemini-1.5-pro",
     safety_settings=safety_settings,
     generation_config=generation_config,
-    system_instruction="you are an advanced AI system designed to provide clear, concise, and accurate answers. Always respond with brevity and precision, ensuring your replies are direct and to the point. Avoid unnecessary details unless explicitly requested, and prioritize clarity in your communication."
+    system_instruction="you are an advanced AI system designed to provide clear, concise, and accurate answers. Always respond in a well-organized manner, using bullet points to present information clearly and effectively. Keep your replies brief and to the point while including one or two lines of additional detail when necessary to enhance clarity or context. Avoid unnecessary elaboration unless explicitly requested for more information."
 )
 
 # Start chat session
