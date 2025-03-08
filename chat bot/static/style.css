@@ -394,18 +394,15 @@
         }
 
         /* Responsive styles */
-   @media (max-width: 640px) {
+     @media (max-width: 640px) {
           
             .chat-container {
-                height:  68vh;
+                height:  66vh;
                 border-radius: 12px;
             }
 
             .chat-header, .chat-footer {
-                     position: sticky; /* Ensures they stay visible */
-        top: 0; /* Header stays at the top */
-        bottom: 0; /* Footer stays at the bottom */
-        z-index: 10; /* Ensure visibility above content */
+                padding: 0.75rem;
             }
 
             .chat-window {
