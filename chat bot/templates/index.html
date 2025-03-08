@@ -138,18 +138,18 @@
                 // Scroll to bottom again after response
                 chatWindow.scrollTop = chatWindow.scrollHeight;
             }
-            // catch (error) {
-            //     // Remove typing indicator
-            //     const indicator = document.getElementById('typing-indicator');
-            //     if (indicator) chatLog.removeChild(indicator);
+            catch (error) {
+                // Remove typing indicator
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) chatLog.removeChild(indicator);
                 
-            //     // Display error message
-            //     chatLog.innerHTML += `<div class="bot-message"><b>Bot:</b> Sorry, I encountered an error. Please try again later.</div>`;
-            //     console.error('Error:', error);
+                // Display error message
+                chatLog.innerHTML += `<div class="bot-message"><b>Bot:</b> Sorry, I encountered an error. Please try again later.</div>`;
+                console.error('Error:', error);
                 
-            //     // Scroll to bottom
-            //     chatWindow.scrollTop = chatWindow.scrollHeight;
-            // }
+                // Scroll to bottom
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            }
         }
 
         // Focus input on load
