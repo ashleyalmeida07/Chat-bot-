@@ -394,25 +394,49 @@
         }
 
         /* Responsive styles */
-        @media (max-width: 640px) {
-            .chat-container {
-                height: 66vh;
-                border-radius: 12px;
-            }
+   @media (max-width: 640px) {
+    .chat-container {
+        height: 100vh; /* Full viewport height */
+        border-radius: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
 
-            .chat-header, .chat-footer {
-                padding: 0.75rem;
-            }
+    .chat-header, .chat-footer {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        z-index: 10; /* Ensure they stay on top */
+    }
 
-            .chat-window {
-                padding: 1rem;
-            }
+    .chat-header {
+        top: 0;
+    }
 
-            .user-message, .bot-message {
-                max-width: 90%;
-            }
+    .chat-footer {
+        bottom: 0;
+    }
 
-            .bg-shape {
-                opacity: 0.3;
-            }
-        }
+    .chat-window {
+        padding: 1rem;
+        margin-top: 4rem; /* Space for fixed header */
+        margin-bottom: 4rem; /* Space for fixed footer */
+        height: calc(100vh - 8rem); /* Remaining space for chat content */
+        overflow-y: auto; /* Ensures messages can scroll */
+    }
+
+    .user-message, .bot-message {
+        max-width: 90%;
+    }
+
+    .bg-shape {
+        opacity: 0.3;
+    }
+
+    body {
+        overflow: hidden; /* Prevents entire page from scrolling */
+    }
+}
+
