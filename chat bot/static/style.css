@@ -395,48 +395,28 @@
 
         /* Responsive styles */
    @media (max-width: 640px) {
-    .chat-container {
-        height: 100vh; /* Full viewport height */
-        border-radius: 0;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-    }
+          
+            .chat-container {
+                height:  68vh;
+                border-radius: 12px;
+            }
 
-    .chat-header, .chat-footer {
-        position: fixed;
-        width: 100%;
-        left: 0;
-        z-index: 10; /* Ensure they stay on top */
-    }
+            .chat-header, .chat-footer {
+                     position: sticky; /* Ensures they stay visible */
+        top: 0; /* Header stays at the top */
+        bottom: 0; /* Footer stays at the bottom */
+        z-index: 10; /* Ensure visibility above content */
+            }
 
-    .chat-header {
-        top: 0;
-    }
+            .chat-window {
+                padding: 1rem;
+            }
 
-    .chat-footer {
-        bottom: 0;
-    }
+            .user-message, .bot-message {
+                max-width: 90%;
+            }
 
-    .chat-window {
-        padding: 1rem;
-        margin-top: 4rem; /* Space for fixed header */
-        margin-bottom: 4rem; /* Space for fixed footer */
-        height: calc(100vh - 8rem); /* Remaining space for chat content */
-        overflow-y: auto; /* Ensures messages can scroll */
-    }
-
-    .user-message, .bot-message {
-        max-width: 90%;
-    }
-
-    .bg-shape {
-        opacity: 0.3;
-    }
-
-    body {
-        overflow: hidden; /* Prevents entire page from scrolling */
-    }
-}
-
+            .bg-shape {
+                opacity: 0.3;
+            }
+        }
