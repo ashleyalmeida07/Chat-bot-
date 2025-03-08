@@ -7,46 +7,155 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="background-shape circle1"></div>
-    <div class="background-shape circle2"></div>
-    <div class="background-shape square1"></div>
-    <div class="background-shape square2"></div>
-    <div class="background-shape triangle1"></div>
-  
-    <div id="chat-container">
-      <h1 id="heading">Chat Bot</h1>
-      <div id="chat-window">
-        <div id="chat-log"></div>
-      </div>
-      <input type="text" id="user-input" placeholder="Type a message...">
-      <button onclick="sendMessage()">Send</button>
+    <!-- Background shapes -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1 class="chat-title">Chat Bot</h1>
+            <div class="theme-toggle">
+                <span class="theme-label" id="theme-label">Light</span>
+                <label class="switch">
+                    <input type="checkbox" id="theme-switch">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="chat-window">
+            <div id="chat-log">
+                <!-- Chat messages will appear here -->
+                <div class="empty-state" id="empty-state">
+                    <div class="icon-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </div>
+                    <h3 class="empty-title">Start a conversation</h3>
+                    <p class="empty-description">Ask me anything and I'll do my best to help you.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-footer">
+            <div class="chat-form">
+                <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off">
+                <button type="button" class="send-button" id="send-button" onclick="sendMessage()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </div>
     </div>
-  
-  
 
     <script>
+        // DOM Elements
+        const themeSwitch = document.getElementById('theme-switch');
+        const themeLabel = document.getElementById('theme-label');
+        const chatLog = document.getElementById('chat-log');
+        const emptyState = document.getElementById('empty-state');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        // Theme toggle functionality
+        themeSwitch.addEventListener('change', () => {
+            document.body.classList.toggle('dark', themeSwitch.checked);
+            themeLabel.textContent = themeSwitch.checked ? 'Dark' : 'Light';
+        });
+
+        // Enable/disable send button based on input
+        userInput.addEventListener('input', () => {
+            sendButton.disabled = userInput.value.trim() === '';
+        });
+
+        // Handle Enter key press
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+
+        
+        // Your provided sendMessage function
         async function sendMessage() {
             const userInput = document.getElementById("user-input");
             const message = userInput.value.trim();
             if (!message) return;
 
+            // Remove empty state if it's the first message
+            if (emptyState && emptyState.parentNode === chatLog) {
+                chatLog.removeChild(emptyState);
+            }
+
             // Display user's message
-            const chatLog = document.getElementById("chat-log");
             chatLog.innerHTML += `<div class="user-message"><b>You:</b> ${message}</div>`;
             userInput.value = '';
+            
+            // Add typing indicator
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'typing-indicator';
+            typingIndicator.id = 'typing-indicator';
+            typingIndicator.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            chatLog.appendChild(typingIndicator);
+            
+            // Scroll to bottom
+            const chatWindow = document.querySelector('.chat-window');
+            chatWindow.scrollTop = chatWindow.scrollHeight;
 
-            // Send message to the backend
-            const response = await fetch('/send_message', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message })
-            });
-            const data = await response.json();
+            try {
+                // Send message to the backend
+                const response = await fetch('/send_message', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+                
+                // Remove typing indicator
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) chatLog.removeChild(indicator);
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const data = await response.json();
 
-            // Display bot's response
-            chatLog.innerHTML += `<div class="bot-message"><b>Bot:</b> ${data.response}</div>`;
-            chatLog.scrollTop = chatLog.scrollHeight;
+                // Display bot's response
+                chatLog.innerHTML += `<div class="bot-message"><b>Bot:</b> ${data.response}</div>`;
+                
+                // Scroll to bottom again after response
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            } catch (error) {
+                // Remove typing indicator
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) chatLog.removeChild(indicator);
+                
+                // Display error message
+                chatLog.innerHTML += `<div class="bot-message"><b>Bot:</b> Sorry, I encountered an error. Please try again later.</div>`;
+                console.error('Error:', error);
+                
+                // Scroll to bottom
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            }
         }
+
+        // Focus input on load
+        window.addEventListener('load', () => {
+            userInput.focus();
+        });
     </script>
+
+  
 </body>
 </html>
