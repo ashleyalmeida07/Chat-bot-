@@ -396,7 +396,7 @@
         /* Responsive styles */
         @media (max-width: 640px) {
             .chat-container {
-                height: 84vh;
+                height: 80vh;
                 border-radius: 12px;
             }
 
