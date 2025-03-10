@@ -398,7 +398,7 @@
           
             .chat-container {
                 height:  66vh;
-                border-radius: 12px;
+                border-radius:12px;
             }
 
             .chat-header, .chat-footer {
